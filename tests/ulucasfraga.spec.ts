@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 import { PortfolioPage, type Language } from './pages/portfolio.page';
 
 const heroTitleByLanguage: Record<Language, string> = {
-  en: 'I make releases boring.',
-  pt: 'Eu deixo os releases sem graça.',
+  en: 'I make release day the best day of the sprint.',
+  pt: 'Eu faço do dia do release o melhor dia da sprint.',
 };
 
 const terminalSummaryByLanguage: Record<Language, string> = {
