@@ -91,7 +91,7 @@ test.describe.parallel('[E2E - Portfolio] @regression', () => {
       }
       await expect(portfolio.locators.impactItems).toHaveCount(6);
       await expect(portfolio.locators.aiSteps).toHaveCount(6);
-      await expect(portfolio.locators.experienceItems).toHaveCount(8);
+      await expect(portfolio.locators.experienceItems).toHaveCount(7);
       await expect(portfolio.locators.toolbox.getByText('Playwright', { exact: true })).toBeVisible();
       await expect(portfolio.locators.repositoryLinks).toHaveCount(7);
       await expect(portfolio.locators.postLinks).toHaveCount(4);
