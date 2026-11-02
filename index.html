@@ -281,8 +281,8 @@
 
   <header class="topbar">
     <div class="wrap">
-      <a class="brand" href="#top" aria-label="Lucas Fraga, back to top"><b>✓</b> lucas.fraga</a>
-      <nav class="nav" aria-label="Sections" data-testid="main-nav">
+      <a class="brand" href="#top" aria-label="Lucas Fraga, back to top" data-i18n-attr="aria-label:a11y.top"><b>✓</b> lucas.fraga</a>
+      <nav class="nav" aria-label="Sections" data-i18n-attr="aria-label:a11y.sections" data-testid="main-nav">
         <a href="#impact" data-i18n="nav.impact">Impact</a>
         <a href="#experience" data-i18n="nav.experience">Experience</a>
         <a href="#toolbox" data-i18n="nav.toolbox">Toolbox</a>
@@ -291,7 +291,7 @@
         <a href="#community" data-i18n="nav.community">Community</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
-      <div class="lang" role="group" aria-label="Language" data-testid="language-switch">
+      <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:a11y.language" data-testid="language-switch">
         <button type="button" data-set-lang="en" aria-pressed="true" data-testid="lang-en">EN</button>
         <button type="button" data-set-lang="pt" aria-pressed="false" data-testid="lang-pt">PT</button>
       </div>
@@ -303,7 +303,7 @@
       <div class="wrap hero-grid">
         <div>
           <div class="who">
-            <img src="https://avatars.githubusercontent.com/u/23031781?v=4" alt="Portrait of Lucas Fraga" width="52" height="52">
+            <img src="https://avatars.githubusercontent.com/u/23031781?v=4" alt="Portrait of Lucas Fraga" data-i18n-attr="alt:a11y.portrait" width="52" height="52">
             <p><strong>Lucas Fraga</strong><span data-i18n="hero.role">Senior QA Automation Specialist, Lisbon</span></p>
           </div>
           <h1 data-testid="hero-title" data-i18n="hero.title">I turn complex releases into fun, reliable days.</h1>
@@ -314,7 +314,7 @@
           </div>
         </div>
 
-        <div class="term" data-testid="hero-terminal" aria-label="A Playwright test run describing Lucas's profile">
+        <div class="term" data-testid="hero-terminal" aria-label="A Playwright test run describing Lucas's profile" data-i18n-attr="aria-label:a11y.terminal">
           <div class="term-head">
             <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <span class="term-title">~/lucas · zsh</span>
@@ -606,25 +606,25 @@
           <li>
             <a class="post" href="https://medium.com/@ulucasfraga/a-linha-t%C3%AAnue-entre-o-uso-da-ia-e-a-iqa-2a55008f1cde" rel="noopener" target="_blank" lang="pt-BR">
               <div><h3>A linha tênue entre o uso da iA e a iQA!</h3><p data-i18n="w.personal">On my Medium</p></div>
-              <span class="lang-tag" title="Portuguese">PT</span>
+              <span class="lang-tag" title="Portuguese" data-i18n-attr="title:a11y.pt">PT</span>
             </a>
           </li>
           <li>
             <a class="post" href="https://medium.com/assertqualityassurance/testando-seu-contrato-com-o-restassured-f0e974fb9bcb" rel="noopener" target="_blank" lang="pt-BR">
               <div><h3>Testando seu “contrato” com o restassured</h3><p data-i18n="w.assert">Published in Assert QA</p></div>
-              <span class="lang-tag" title="Portuguese">PT</span>
+              <span class="lang-tag" title="Portuguese" data-i18n-attr="title:a11y.pt">PT</span>
             </a>
           </li>
           <li>
             <a class="post" href="https://medium.com/assertqualityassurance/setting-cypress-and-cucumber-in-e2e-tests-6239adac1077" rel="noopener" target="_blank" lang="en">
               <div><h3>Setting Cypress and Cucumber in e2e tests</h3><p data-i18n="w.assert">Published in Assert QA</p></div>
-              <span class="lang-tag" title="English">EN</span>
+              <span class="lang-tag" title="English" data-i18n-attr="title:a11y.en">EN</span>
             </a>
           </li>
           <li>
             <a class="post" href="https://medium.com/assertqualityassurance/element-doesnt-load-properly-in-the-browser-using-protractor-let-s-solve-it-8381b71d3956" rel="noopener" target="_blank" lang="en">
               <div><h3>Element doesn’t load properly in the browser using Protractor? Let’s solve it!</h3><p data-i18n="w.assert">Published in Assert QA</p></div>
-              <span class="lang-tag" title="English">EN</span>
+              <span class="lang-tag" title="English" data-i18n-attr="title:a11y.en">EN</span>
             </a>
           </li>
         </ul>
@@ -687,6 +687,13 @@
 
       var PT = {
         'skip': 'Pular para o conteúdo',
+        'a11y.top': 'Lucas Fraga, voltar ao topo',
+        'a11y.sections': 'Seções',
+        'a11y.language': 'Idioma',
+        'a11y.portrait': 'Foto de Lucas Fraga',
+        'a11y.terminal': 'Uma execução de testes no Playwright descrevendo o perfil do Lucas',
+        'a11y.pt': 'Português',
+        'a11y.en': 'Inglês',
         'nav.impact': 'Impacto',
         'nav.experience': 'Experiência',
         'nav.toolbox': 'Ferramentas',
@@ -705,7 +712,7 @@
         'impact.2': 'Automatizei os fluxos críticos de UI e API de uma plataforma com mais de 5M de usuários por dia.',
         'impact.3': 'Estratégia de performance para o onboarding e os pagamentos de um banco digital, incluindo PIX, cartões e transferências.',
         'impact.4': 'Testes de carga que comprovaram a disponibilidade no pico de acessos, antes de um grande lançamento no varejo.',
-        'impact.5': 'Quality gates no CI/CD que barram builds ruins antes, em vez de apenas reportar o problema depois.',
+        'impact.5': 'Quality gates no CI/CD que bloqueiam builds ruins antes, em vez de apenas reportar o problema depois.',
         'impact.6': 'Liderei e mentorei times de QA no Brasil, nos EUA e em Portugal; minhas práticas de teste viraram padrão em mais de 12 projetos.',
         'exp.title': 'Onde eu já testei',
         'exp.lede': '100% remoto desde 2019, para times no Rio de Janeiro, em São Francisco e em Lisboa.',
@@ -748,7 +755,7 @@
         'tools.perf': 'Performance',
         'tools.perf.d': 'Testes de carga, estresse e soak antes do lançamento',
         'tools.ci': 'CI/CD e cloud',
-        'tools.ci.d': 'Quality gates que barram builds ruins',
+        'tools.ci.d': 'Quality gates que bloqueiam builds ruins',
         'tools.lang': 'Linguagens e dados',
         'tools.lang.d': 'A base de cada framework',
         'tools.report': 'Relatórios e gestão',
@@ -790,11 +797,17 @@
       var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
       nodes.forEach(function (node) { node.dataset.en = node.innerHTML; });
 
+      var attrNodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n-attr]'));
+      attrNodes.forEach(function (node) {
+        var parts = node.dataset.i18nAttr.split(':');
+        node.dataset.enAttr = node.getAttribute(parts[0]);
+      });
+
       var TESTS = {
         en: {
           run: 'Running 8 tests using 4 workers',
           tests: [
-            ['pass', 'career', 'has 11+ years of QA, senior since 2019'],
+            ['pass', 'career', 'has 11+ years in QA, senior since 2019'],
             ['pass', 'web', 'automates E2E with Playwright, Cypress and Selenium'],
             ['pass', 'api', 'validates APIs with RestAssured, Karate and SuperTest'],
             ['pass', 'mobile', 'tests iOS and Android with Appium'],
@@ -809,14 +822,14 @@
         pt: {
           run: 'Executando 8 testes com 4 workers',
           tests: [
-            ['pass', 'career', 'tem 11+ anos de QA, sênior desde 2019'],
+            ['pass', 'career', 'tem 11+ anos em QA, sênior desde 2019'],
             ['pass', 'web', 'automatiza E2E com Playwright, Cypress e Selenium'],
             ['pass', 'api', 'valida APIs com RestAssured, Karate e SuperTest'],
             ['pass', 'mobile', 'testa iOS e Android com Appium'],
-            ['pass', 'perf', 'faz teste de carga com k6, JMeter e Locust'],
-            ['pass', 'ci', 'barra builds ruins com quality gates no CI'],
+            ['pass', 'perf', 'faz testes de carga com k6, JMeter e Locust'],
+            ['pass', 'ci', 'bloqueia builds ruins com quality gates no CI'],
             ['pass', 'team', 'já liderou times de até 8 QAs'],
-            ['skip', 'life', 'para de aprender']
+            ['skip', 'life', 'deixa de aprender']
           ],
           summary: '7 passaram, 1 ignorado',
           skipNote: 'motivo: nunca'
@@ -891,6 +904,10 @@
         nodes.forEach(function (node) {
           var key = node.dataset.i18n;
           node.innerHTML = currentLang === 'pt' && PT[key] ? PT[key] : node.dataset.en;
+        });
+        attrNodes.forEach(function (node) {
+          var parts = node.dataset.i18nAttr.split(':');
+          node.setAttribute(parts[0], currentLang === 'pt' && PT[parts[1]] ? PT[parts[1]] : node.dataset.enAttr);
         });
         document.querySelectorAll('[data-set-lang]').forEach(function (button) {
           button.setAttribute('aria-pressed', String(button.dataset.setLang === currentLang));

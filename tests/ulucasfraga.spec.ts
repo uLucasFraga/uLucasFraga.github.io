@@ -11,6 +11,11 @@ const terminalSummaryByLanguage: Record<Language, string> = {
   pt: '7 passaram, 1 ignorado',
 };
 
+const portraitAltByLanguage: Record<Language, string> = {
+  en: 'Portrait of Lucas Fraga',
+  pt: 'Foto de Lucas Fraga',
+};
+
 const sectionIds = ['impact', 'experience', 'toolbox', 'open-source', 'writing', 'community', 'contact'] as const;
 
 test.describe.parallel('[E2E - Portfolio] @regression', () => {
@@ -58,6 +63,7 @@ test.describe.parallel('[E2E - Portfolio] @regression', () => {
         await expect(portfolio.locators.heroTitle).toHaveText(heroTitleByLanguage[language]);
         await portfolio.expectTerminalFinished();
         await expect(portfolio.locators.terminalBody).toContainText(terminalSummaryByLanguage[language]);
+        await expect(portfolio.page.getByRole('img', { name: portraitAltByLanguage[language], exact: true })).toBeAttached();
       });
     }
 
