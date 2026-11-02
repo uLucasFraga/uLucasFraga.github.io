@@ -7,8 +7,8 @@ const heroTitleByLanguage: Record<Language, string> = {
 };
 
 const terminalSummaryByLanguage: Record<Language, string> = {
-  en: '7 passed, 1 skipped',
-  pt: '7 passaram, 1 ignorado',
+  en: '8 passed, 1 skipped',
+  pt: '8 passaram, 1 ignorado',
 };
 
 const portraitAltByLanguage: Record<Language, string> = {
@@ -16,7 +16,7 @@ const portraitAltByLanguage: Record<Language, string> = {
   pt: 'Foto de Lucas Fraga',
 };
 
-const sectionIds = ['impact', 'experience', 'toolbox', 'open-source', 'writing', 'community', 'contact'] as const;
+const sectionIds = ['impact', 'ai', 'experience', 'toolbox', 'open-source', 'writing', 'community', 'contact'] as const;
 
 test.describe.parallel('[E2E - Portfolio] @regression', () => {
   let portfolio: PortfolioPage;
@@ -90,6 +90,7 @@ test.describe.parallel('[E2E - Portfolio] @regression', () => {
         await expect(page.locator(`section#${sectionId}`)).toBeVisible();
       }
       await expect(portfolio.locators.impactItems).toHaveCount(6);
+      await expect(portfolio.locators.aiSteps).toHaveCount(6);
       await expect(portfolio.locators.experienceItems).toHaveCount(8);
       await expect(portfolio.locators.toolbox.getByText('Playwright', { exact: true })).toBeVisible();
       await expect(portfolio.locators.repositoryLinks).toHaveCount(7);

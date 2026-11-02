@@ -203,6 +203,18 @@
     .k { color: var(--pink); } .fn { color: var(--green); } .s { color: var(--yellow); } .n { color: var(--purple); } .v { color: var(--fg); } .c { color: var(--comment); }
     @media (max-width: 760px) { .asserts li { grid-template-columns: 1fr; } }
 
+    /* ---------- AI workflow ---------- */
+    .flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; counter-reset: step; }
+    .flow li { background: var(--bg); padding: 1.35rem 1.4rem 1.5rem; counter-increment: step; display: flex; flex-direction: column; gap: 0.5rem; }
+    .flow li::before { content: counter(step, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.8125rem; color: var(--purple); }
+    .flow h3 { font-size: var(--step-0); }
+    .flow p { margin: 0; color: var(--fg-soft); font-size: 0.9375rem; flex: 1; }
+    .flow .uses { font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyan); line-height: 1.6; }
+    .principle { margin: 2rem 0 0; padding-left: 1rem; border-left: 3px solid var(--green); font-size: var(--step-1); line-height: 1.45; max-width: 46rem; }
+    .principle span { color: var(--fg-soft); font-size: var(--step-0); display: block; margin-top: 0.35rem; }
+    @media (max-width: 900px) { .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } }
+
     /* ---------- experience ---------- */
     .timeline { list-style: none; margin: 0; padding: 0; }
     .job { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.5rem 2.5rem; padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
@@ -284,6 +296,7 @@
       <a class="brand" href="#top" aria-label="Lucas Fraga, back to top" data-i18n-attr="aria-label:a11y.top"><b>✓</b> lucas.fraga</a>
       <nav class="nav" aria-label="Sections" data-i18n-attr="aria-label:a11y.sections" data-testid="main-nav">
         <a href="#impact" data-i18n="nav.impact">Impact</a>
+        <a href="#ai" data-i18n="nav.ai">AI</a>
         <a href="#experience" data-i18n="nav.experience">Experience</a>
         <a href="#toolbox" data-i18n="nav.toolbox">Toolbox</a>
         <a href="#open-source" data-i18n="nav.oss">Open source</a>
@@ -361,6 +374,49 @@
       </div>
     </section>
 
+    <!-- AI -->
+    <section id="ai" aria-labelledby="ai-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="ai-title" data-i18n="ai.title">How I test with AI</h2>
+          <p data-i18n="ai.lede">Agents in the loop at every step, from the ticket to the bug report. This is my day-to-day workflow with Claude Code, MCP and Playwright's own agents.</p>
+        </div>
+        <ol class="flow" data-testid="ai-flow">
+          <li>
+            <h3 data-i18n="ai.1.t">Plan from the ticket</h3>
+            <p data-i18n="ai.1.d">Acceptance criteria and Jira tickets, read through the Atlassian MCP, become a test plan that I review before anything is written.</p>
+            <span class="uses">Claude Code, Jira MCP, Playwright planner</span>
+          </li>
+          <li>
+            <h3 data-i18n="ai.2.t">Generate in the project's patterns</h3>
+            <p data-i18n="ai.2.d">API and E2E tests generated from specs, Swagger and the plan, following the project rules in CLAUDE.md and my custom skills.</p>
+            <span class="uses">Claude Code skills, CLAUDE.md, Playwright generator, Kiro</span>
+          </li>
+          <li>
+            <h3 data-i18n="ai.3.t">Verify against the real app</h3>
+            <p data-i18n="ai.3.d">The agent drives the real UI through Playwright MCP and checks the data in the database, so tests are built on facts, not assumptions.</p>
+            <span class="uses">Playwright MCP, database MCP</span>
+          </li>
+          <li>
+            <h3 data-i18n="ai.4.t">Heal and triage failures</h3>
+            <p data-i18n="ai.4.d">Failing and flaky tests are analyzed from traces and logs by dedicated subagents. The healer fixes selectors; logic changes stay my call.</p>
+            <span class="uses">Subagents, Playwright healer, traces</span>
+          </li>
+          <li>
+            <h3 data-i18n="ai.5.t">Guard every change</h3>
+            <p data-i18n="ai.5.d">Hooks run lint, type-check and the affected tests on every edit, so an agent can never hand over a red suite.</p>
+            <span class="uses">Claude Code hooks, CI quality gates</span>
+          </li>
+          <li>
+            <h3 data-i18n="ai.6.t">Report like a human would</h3>
+            <p data-i18n="ai.6.d">Bug reports and test plans drafted in a standard format, with steps and evidence, and reviewed before they reach the team.</p>
+            <span class="uses">Claude Code skills, Jira MCP</span>
+          </li>
+        </ol>
+        <p class="principle" data-i18n="ai.principle">AI drafts, I decide.<span>Every generated test is reviewed and run against the real app before it counts.</span></p>
+      </div>
+    </section>
+
     <!-- Experience -->
     <section id="experience" aria-labelledby="experience-title">
       <div class="wrap">
@@ -378,7 +434,7 @@
               <ul>
                 <li data-i18n="exp.cur.1">API test automation for third-party integrations, from contract and schema checks to full end-to-end flows.</li>
                 <li data-i18n="exp.cur.2">Playwright E2E suites running in GitHub Actions, with Allure reporting and test plans written alongside the product team.</li>
-                <li data-i18n="exp.cur.3">AI-assisted test design with Claude Code and MCP, cutting the time from spec to first green run.</li>
+                <li data-i18n="exp.cur.3">AI-assisted QA workflow with Claude Code (custom skills, subagents and hooks) and MCP (Playwright, Jira, database), from acceptance criteria to reviewed, running tests.</li>
               </ul>
               <p class="stack">Stack: <span>JavaScript, TypeScript, Playwright, Java, RestAssured, Cucumber, Jenkins, GitHub Actions, Allure</span></p>
             </div>
@@ -525,7 +581,7 @@
           <div class="tool-group">
             <h3 data-i18n="tools.ai">AI-assisted testing</h3>
             <p data-i18n="tools.ai.d">Faster test design, always reviewed by a human</p>
-            <ul class="chips"><li class="daily">Claude Code</li><li>MCP</li><li>Kiro</li><li>OpenAI</li></ul>
+            <ul class="chips"><li class="daily">Claude Code</li><li class="daily">Playwright MCP</li><li>Playwright Test Agents</li><li>Jira MCP</li><li>Skills, subagents, hooks</li><li>Kiro</li></ul>
           </div>
         </div>
         <p class="legend"><i aria-hidden="true"></i><span data-i18n="tools.legend">Highlighted: what I use every week right now.</span></p>
@@ -714,6 +770,22 @@
         'impact.4': 'Testes de carga que comprovaram a disponibilidade no pico de acessos, antes de um grande lançamento no varejo.',
         'impact.5': 'Quality gates no CI/CD que bloqueiam builds ruins antes, em vez de apenas reportar o problema depois.',
         'impact.6': 'Liderei e mentorei times de QA no Brasil, nos EUA e em Portugal; minhas práticas de teste viraram padrão em mais de 12 projetos.',
+        'nav.ai': 'IA',
+        'ai.title': 'Como eu testo com IA',
+        'ai.lede': 'Agentes no fluxo em cada etapa, do ticket ao reporte do bug. Este é o meu dia a dia com Claude Code, MCP e os agentes do próprio Playwright.',
+        'ai.1.t': 'Planejar a partir do ticket',
+        'ai.1.d': 'Critérios de aceite e tickets do Jira, lidos pelo MCP da Atlassian, viram um plano de testes que eu reviso antes de qualquer linha ser escrita.',
+        'ai.2.t': 'Gerar nos padrões do projeto',
+        'ai.2.d': 'Testes de API e E2E gerados a partir de specs, Swagger e do plano, seguindo as regras do projeto no CLAUDE.md e as minhas skills próprias.',
+        'ai.3.t': 'Validar no app real',
+        'ai.3.d': 'O agente navega na UI real pelo Playwright MCP e confere os dados no banco, para que os testes nasçam de fatos, não de suposições.',
+        'ai.4.t': 'Curar e triar falhas',
+        'ai.4.d': 'Testes que falham ou são flaky são analisados a partir de traces e logs por subagents dedicados. O healer corrige seletores; mudanças de lógica continuam sendo decisão minha.',
+        'ai.5.t': 'Proteger cada mudança',
+        'ai.5.d': 'Hooks rodam lint, checagem de tipos e os testes afetados a cada edição, para que um agente nunca entregue uma suíte vermelha.',
+        'ai.6.t': 'Reportar como uma pessoa faria',
+        'ai.6.d': 'Bugs e planos de teste escritos num formato padrão, com passos e evidências, e revisados antes de chegar ao time.',
+        'ai.principle': 'A IA faz o rascunho, eu decido.<span>Todo teste gerado é revisado e executado no app real antes de valer.</span>',
         'exp.title': 'Onde eu já testei',
         'exp.lede': '100% remoto desde 2019, para times no Rio de Janeiro, em São Francisco e em Lisboa.',
         'exp.now': 'atual',
@@ -721,7 +793,7 @@
         'exp.cur.meta': 'Lisboa/PT (Remoto). Produtos de fintech e seguros',
         'exp.cur.1': 'Automação de testes de API para integrações com terceiros, da validação de contrato e schema até fluxos E2E completos.',
         'exp.cur.2': 'Suítes E2E em Playwright rodando no GitHub Actions, com relatórios no Allure e planos de teste escritos junto com o time de produto.',
-        'exp.cur.3': 'Design de testes assistido por IA com Claude Code e MCP, encurtando o caminho da especificação até o primeiro build verde.',
+        'exp.cur.3': 'Fluxo de QA assistido por IA com Claude Code (skills próprias, subagents e hooks) e MCP (Playwright, Jira, banco de dados), dos critérios de aceite até testes revisados e rodando.',
         'exp.innotech.meta': 'Lisboa/PT (Remoto). Consultoria para um grande varejista de eletrônicos',
         'exp.innotech.1': 'Reduzi a suíte automatizada de 4 horas para 45 minutos com um framework redesenhado.',
         'exp.innotech.2': 'Defini a estratégia de testes mobile (iOS e Android) e os testes de performance para 100 mil usuários simultâneos.',
@@ -805,7 +877,7 @@
 
       var TESTS = {
         en: {
-          run: 'Running 8 tests using 4 workers',
+          run: 'Running 9 tests using 4 workers',
           tests: [
             ['pass', 'career', 'has 11+ years in QA, senior since 2019'],
             ['pass', 'web', 'automates E2E with Playwright, Cypress and Selenium'],
@@ -813,14 +885,15 @@
             ['pass', 'mobile', 'tests iOS and Android with Appium'],
             ['pass', 'perf', 'load-tests with k6, JMeter and Locust'],
             ['pass', 'ci', 'blocks bad builds with CI quality gates'],
+            ['pass', 'ai', 'tests with AI agents via Claude Code and MCP'],
             ['pass', 'team', 'has led QA teams of up to 8 engineers'],
             ['skip', 'life', 'stops learning']
           ],
-          summary: '7 passed, 1 skipped',
+          summary: '8 passed, 1 skipped',
           skipNote: 'reason: never'
         },
         pt: {
-          run: 'Executando 8 testes com 4 workers',
+          run: 'Executando 9 testes com 4 workers',
           tests: [
             ['pass', 'career', 'tem 11+ anos em QA, sênior desde 2019'],
             ['pass', 'web', 'automatiza E2E com Playwright, Cypress e Selenium'],
@@ -828,10 +901,11 @@
             ['pass', 'mobile', 'testa iOS e Android com Appium'],
             ['pass', 'perf', 'faz testes de carga com k6, JMeter e Locust'],
             ['pass', 'ci', 'bloqueia builds ruins com quality gates no CI'],
+            ['pass', 'ai', 'testa com agentes de IA via Claude Code e MCP'],
             ['pass', 'team', 'já liderou times de até 8 QAs'],
             ['skip', 'life', 'deixa de aprender']
           ],
-          summary: '7 passaram, 1 ignorado',
+          summary: '8 passaram, 1 ignorado',
           skipNote: 'motivo: nunca'
         }
       };

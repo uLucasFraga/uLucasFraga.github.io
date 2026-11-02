@@ -11,6 +11,7 @@ export class PortfolioPage {
     rerunButton: Locator;
     navigation: Locator;
     impactItems: Locator;
+    aiSteps: Locator;
     experienceItems: Locator;
     toolbox: Locator;
     repositoryLinks: Locator;
@@ -28,6 +29,7 @@ export class PortfolioPage {
       rerunButton: page.getByTestId('rerun-tests'),
       navigation: page.getByTestId('main-nav'),
       impactItems: page.getByTestId('impact-list').getByRole('listitem'),
+      aiSteps: page.getByTestId('ai-flow').getByRole('listitem'),
       experienceItems: page.getByTestId('experience-list').locator(':scope > li'),
       toolbox: page.getByTestId('toolbox'),
       repositoryLinks: page.getByTestId('repo-list').getByRole('link'),
