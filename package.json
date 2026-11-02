@@ -1,0 +1,18 @@
+{
+  "name": "ulucasfraga.github.io",
+  "private": true,
+  "description": "Portfolio of Lucas Fraga, QA Automation Engineer, with its own Playwright test suite.",
+  "scripts": {
+    "start": "http-server . -p 4173 -c-1 --silent",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "report": "playwright show-report",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.20.5",
+    "http-server": "^14.1.1",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lucas Fraga · QA Automation Engineer</title>
+  <meta name="description" content="Lucas Fraga, Senior QA Automation Engineer in Lisbon with 11+ years automating web, API, mobile and performance tests with Playwright, Cypress, Selenium, RestAssured, Appium and k6.">
+  <meta name="theme-color" content="#282A36">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lucas Fraga · QA Automation Engineer">
+  <meta property="og:description" content="11+ years automating web, API, mobile and performance tests. Based in Lisbon.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/23031781?v=4">
+  <meta property="og:url" content="https://ulucasfraga.github.io/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://ulucasfraga.github.io/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23282A36'/%3E%3Cpath d='M9 17l5 5 9-12' fill='none' stroke='%2350FA7B' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lucas Fraga",
+    "jobTitle": "Senior QA Automation Engineer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Lisbon", "addressCountry": "PT" },
+    "url": "https://ulucasfraga.github.io/",
+    "sameAs": [
+      "https://github.com/uLucasFraga",
+      "https://www.linkedin.com/in/ulucasfraga/",
+      "https://medium.com/@ulucasfraga"
+    ],
+    "knowsAbout": ["Test automation", "Playwright", "Cypress", "Selenium", "RestAssured", "Appium", "k6", "JMeter", "API testing", "Performance testing", "Mobile testing"]
+  }
+  </script>
+  <style>
+    :root {
+      /* Dracula classic palette (draculatheme.com/spec) */
+      --bg: #282A36;
+      --bg-deep: #21222C;
+      --selection: #44475A;
+      --fg: #F8F8F2;
+      --comment: #6272A4;
+      --cyan: #8BE9FD;
+      --green: #50FA7B;
+      --orange: #FFB86C;
+      --pink: #FF79C6;
+      --purple: #BD93F9;
+      --red: #FF5555;
+      --yellow: #F1FA8C;
+
+      --fg-soft: #C9CAD6;
+      --rule: #3A3C4E;
+
+      --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --step--1: 0.875rem;
+      --step-0: 1.0625rem;
+      --step-1: 1.3125rem;
+      --step-2: 1.75rem;
+      --step-3: 2.5rem;
+      --step-4: clamp(2.75rem, 7vw, 4.75rem);
+
+      --measure: 68ch;
+      --gutter: clamp(1rem, 4vw, 2.5rem);
+      color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-size: var(--step-0);
+      line-height: 1.6;
+      font-optical-sizing: auto;
+    }
+
+    a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--fg); }
+    :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; border-radius: 3px; }
+    ::selection { background: var(--selection); color: var(--fg); }
+
+    .skip-link { position: absolute; left: -999px; top: 0.5rem; background: var(--pink); color: var(--bg); padding: 0.4rem 0.8rem; z-index: 10; }
+    .skip-link:focus { left: 0.5rem; }
+
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* ---------- top bar ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 5;
+      background: color-mix(in srgb, var(--bg-deep) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .topbar .wrap { display: flex; align-items: center; gap: 1rem; min-height: 3.25rem; }
+    .brand { font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg); text-decoration: none; white-space: nowrap; }
+    .brand b { color: var(--green); font-weight: 600; }
+    .nav { display: flex; gap: 0.25rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      color: var(--fg-soft); text-decoration: none; font-size: var(--step--1);
+      padding: 0.35rem 0.6rem; border-radius: 6px; white-space: nowrap;
+    }
+    .nav a:hover { color: var(--fg); background: var(--selection); }
+    .lang {
+      display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 2px; flex-shrink: 0;
+    }
+    .lang button {
+      font: inherit; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.02em;
+      background: none; border: 0; color: var(--comment); padding: 0.2rem 0.65rem; border-radius: 999px; cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] { background: var(--purple); color: var(--bg); }
+    @media (max-width: 760px) { .nav { display: none; } .lang { margin-left: auto; } }
+
+    /* ---------- hero ---------- */
+    .hero { padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 4.5rem); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+    .who { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.75rem; }
+    .who img { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--purple); }
+    .who p { margin: 0; line-height: 1.35; }
+    .who strong { display: block; font-size: var(--step-1); font-weight: 700; }
+    .who span { color: var(--fg-soft); font-size: var(--step--1); }
+
+    h1 {
+      font-size: var(--step-4); line-height: 0.98; letter-spacing: -0.035em;
+      font-weight: 800; margin: 0 0 1.25rem; max-width: 12ch;
+    }
+    .lede { color: var(--fg-soft); font-size: var(--step-1); line-height: 1.5; max-width: 34rem; margin: 0 0 2rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; font: inherit; font-weight: 600; font-size: var(--step-0);
+      text-decoration: none; padding: 0.7rem 1.15rem; border-radius: 8px; cursor: pointer; border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--green); color: var(--bg); }
+    .btn-primary:hover { background: #7BFC9C; color: var(--bg); }
+    .btn-ghost { border-color: var(--selection); color: var(--fg); background: none; }
+    .btn-ghost:hover { border-color: var(--purple); color: var(--fg); }
+
+    /* ---------- terminal (the one loud element) ---------- */
+    .term {
+      background: var(--bg-deep); border: 1px solid var(--rule); border-radius: 12px;
+      font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.75;
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(189, 147, 249, 0.06);
+      overflow: hidden;
+    }
+    .term-head {
+      display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid var(--rule); color: var(--comment);
+    }
+    .dots { display: flex; gap: 6px; }
+    .dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+    .dots i:nth-child(1) { background: var(--red); }
+    .dots i:nth-child(2) { background: var(--yellow); }
+    .dots i:nth-child(3) { background: var(--green); }
+    .term-title { margin-left: 0.5rem; font-size: 0.75rem; }
+    .rerun {
+      margin-left: auto; font: inherit; font-size: 0.75rem; color: var(--fg-soft);
+      background: var(--selection); border: 0; border-radius: 6px; padding: 0.2rem 0.6rem; cursor: pointer;
+    }
+    .rerun:hover { color: var(--fg); background: #55586E; }
+    .rerun:disabled { opacity: 0.5; cursor: progress; }
+    .term-body { padding: 1rem 1.1rem 1.15rem; min-height: 23rem; }
+    .term-body p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .prompt { color: var(--green); }
+    .muted { color: var(--comment); }
+    .pass { color: var(--green); }
+    .skip { color: var(--yellow); }
+    .tag { color: var(--purple); }
+    .file { color: var(--cyan); }
+    .line { opacity: 0; transform: translateY(2px); transition: opacity 0.18s ease, transform 0.18s ease; }
+    .line.on { opacity: 1; transform: none; }
+    .cursor { display: inline-block; width: 0.55em; height: 1.1em; background: var(--fg); vertical-align: -0.2em; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .line { transition: none; }
+      .cursor { animation: none; }
+    }
+
+    /* ---------- sections ---------- */
+    section { padding: clamp(3.5rem, 8vw, 6rem) 0; border-top: 1px solid var(--rule); scroll-margin-top: 3.5rem; }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem; margin-bottom: clamp(2rem, 4vw, 3rem); max-width: var(--measure); }
+    h2 { font-size: var(--step-3); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; margin: 0; }
+    .section-head p { color: var(--fg-soft); margin: 0; font-size: var(--step-1); line-height: 1.5; }
+    h3 { font-size: var(--step-1); line-height: 1.25; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+
+    /* ---------- impact as assertions ---------- */
+    .asserts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+    .asserts li {
+      display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0.5rem 2.5rem; align-items: baseline;
+      padding: 1.15rem 0; border-bottom: 1px dashed var(--rule);
+    }
+    .asserts li:first-child { border-top: 1px dashed var(--rule); }
+    .asserts code { font-family: var(--font-mono); font-size: 0.9375rem; line-height: 1.6; overflow-wrap: anywhere; }
+    .asserts p { margin: 0; color: var(--fg-soft); }
+    .k { color: var(--pink); } .fn { color: var(--green); } .s { color: var(--yellow); } .n { color: var(--purple); } .v { color: var(--fg); } .c { color: var(--comment); }
+    @media (max-width: 760px) { .asserts li { grid-template-columns: 1fr; } }
+
+    /* ---------- experience ---------- */
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .job { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.5rem 2.5rem; padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+    .job:first-child { padding-top: 0; }
+    .when { font-family: var(--font-mono); font-size: var(--step--1); color: var(--comment); padding-top: 0.2rem; }
+    .job.now .when { color: var(--green); }
+    .job-meta { color: var(--fg-soft); margin: 0.2rem 0 0.75rem; }
+    .job-meta b { color: var(--orange); font-weight: 500; }
+    .job ul { margin: 0 0 0.85rem; padding-left: 1.1rem; max-width: var(--measure); }
+    .job li { margin: 0.3rem 0; }
+    .job li::marker { color: var(--purple); }
+    .stack { margin: 0; color: var(--comment); font-size: var(--step--1); }
+    .stack span { color: var(--fg-soft); }
+    @media (max-width: 680px) { .job { grid-template-columns: 1fr; } }
+
+    /* ---------- toolbox ---------- */
+    .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 2.25rem 3rem; }
+    .tool-group h3 { font-size: var(--step-0); margin-bottom: 0.2rem; }
+    .tool-group > p { margin: 0 0 0.8rem; color: var(--comment); font-size: var(--step--1); }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+    .chips li {
+      font-size: 0.9375rem; padding: 0.22rem 0.65rem; border-radius: 6px;
+      background: var(--selection); color: var(--fg);
+    }
+    .chips li.daily { background: rgba(80, 250, 123, 0.12); color: var(--green); box-shadow: inset 0 0 0 1px rgba(80, 250, 123, 0.35); }
+    .legend { margin-top: 2.5rem; color: var(--fg-soft); font-size: var(--step--1); display: flex; align-items: center; gap: 0.5rem; }
+    .legend i { width: 0.8rem; height: 0.8rem; border-radius: 3px; background: rgba(80, 250, 123, 0.12); box-shadow: inset 0 0 0 1px rgba(80, 250, 123, 0.5); display: inline-block; }
+
+    /* ---------- open source ---------- */
+    .repos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1rem; }
+    .repo {
+      display: flex; flex-direction: column; gap: 0.4rem; height: 100%;
+      padding: 1.1rem 1.2rem; border: 1px solid var(--rule); border-radius: 10px; text-decoration: none; color: var(--fg);
+      background: var(--bg-deep);
+    }
+    .repo:hover { border-color: var(--purple); color: var(--fg); }
+    .repo-name { font-family: var(--font-mono); font-size: 0.9375rem; color: var(--cyan); overflow-wrap: anywhere; }
+    .repo p { margin: 0; color: var(--fg-soft); font-size: 0.9375rem; flex: 1; }
+    .repo-foot { display: flex; gap: 1rem; color: var(--comment); font-size: var(--step--1); }
+    .repo-foot .star { color: var(--yellow); }
+    .repo-wide { grid-column: 1 / -1; }
+    .repo.featured { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem 2rem; }
+    .repo.featured code { font-family: var(--font-mono); color: var(--green); background: var(--bg); padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid var(--rule); white-space: nowrap; }
+    @media (max-width: 680px) { .repo.featured { grid-template-columns: 1fr; } }
+
+    /* ---------- writing ---------- */
+    .posts { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
+    .posts li { border-bottom: 1px dashed var(--rule); }
+    .posts li:first-child { border-top: 1px dashed var(--rule); }
+    .post { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 2rem; align-items: baseline; padding: 1.1rem 0; text-decoration: none; color: var(--fg); }
+    .post:hover h3 { color: var(--cyan); }
+    .post p { margin: 0; color: var(--comment); font-size: var(--step--1); }
+    .post .lang-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--purple); border: 1px solid var(--selection); border-radius: 4px; padding: 0.05rem 0.4rem; }
+    .posts-more { margin: 1.5rem 0 0; }
+    @media (max-width: 680px) { .post { grid-template-columns: 1fr; } }
+
+    /* ---------- community ---------- */
+    .community { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 2rem 3rem; }
+    .community article p { color: var(--fg-soft); margin: 0.4rem 0 0; max-width: var(--measure); }
+    .community .when { padding: 0; margin-bottom: 0.3rem; }
+
+    /* ---------- contact ---------- */
+    .contact h2 { font-size: var(--step-4); line-height: 1; max-width: 16ch; margin-bottom: 1.25rem; }
+    .contact .lede { margin-bottom: 2rem; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    footer { border-top: 1px solid var(--rule); padding: 2rem 0 3rem; color: var(--comment); font-size: var(--step--1); }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+    footer a { color: var(--fg-soft); }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Lucas Fraga, back to top"><b>✓</b> lucas.fraga</a>
+      <nav class="nav" aria-label="Sections" data-testid="main-nav">
+        <a href="#impact" data-i18n="nav.impact">Impact</a>
+        <a href="#experience" data-i18n="nav.experience">Experience</a>
+        <a href="#toolbox" data-i18n="nav.toolbox">Toolbox</a>
+        <a href="#open-source" data-i18n="nav.oss">Open source</a>
+        <a href="#writing" data-i18n="nav.writing">Writing</a>
+        <a href="#community" data-i18n="nav.community">Community</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Language" data-testid="language-switch">
+        <button type="button" data-set-lang="en" aria-pressed="true" data-testid="lang-en">EN</button>
+        <button type="button" data-set-lang="pt" aria-pressed="false" data-testid="lang-pt">PT</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="who">
+            <img src="https://avatars.githubusercontent.com/u/23031781?v=4" alt="Portrait of Lucas Fraga" width="52" height="52">
+            <p><strong>Lucas Fraga</strong><span data-i18n="hero.role">Senior QA Automation Engineer, Lisbon</span></p>
+          </div>
+          <h1 data-testid="hero-title" data-i18n="hero.title">I make releases boring.</h1>
+          <p class="lede" data-i18n="hero.lede">Eleven years building the tests that catch bugs before users do: web, API, mobile and performance, wired into CI so every deploy has to earn its way to production.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#experience" data-testid="cta-experience" data-i18n="hero.cta1">See my experience</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/ulucasfraga/" rel="noopener" target="_blank" data-testid="cta-linkedin" data-i18n="hero.cta2">Talk on LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="term" data-testid="hero-terminal" aria-label="A Playwright test run describing Lucas's profile">
+          <div class="term-head">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-title">~/lucas · zsh</span>
+            <button class="rerun" type="button" data-testid="rerun-tests" data-i18n="term.rerun">Run again</button>
+          </div>
+          <div class="term-body" id="term-body" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact -->
+    <section id="impact" aria-labelledby="impact-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="impact-title" data-i18n="impact.title">Results, written as assertions</h2>
+          <p data-i18n="impact.lede">Numbers from real projects in banking, payments, media, telecom and retail.</p>
+        </div>
+        <ul class="asserts" data-testid="impact-list">
+          <li>
+            <code><span class="fn">expect</span>(<span class="v">suiteRuntime</span>).<span class="fn">toBe</span>(<span class="s">'45m'</span>) <span class="c">// was 4h</span></code>
+            <p data-i18n="impact.1">Rebuilt a regression suite for a large retail platform so it finishes before the coffee does.</p>
+          </li>
+          <li>
+            <code><span class="fn">expect</span>(<span class="v">regressionCycle</span>).<span class="fn">toBe</span>(<span class="s">'1 day'</span>) <span class="c">// was 1 week</span></code>
+            <p data-i18n="impact.2">Automated the critical UI and API flows of a platform serving 5M+ daily users.</p>
+          </li>
+          <li>
+            <code><span class="fn">expect</span>(<span class="v">dailyTransactions</span>).<span class="fn">toBeGreaterThan</span>(<span class="n">1_000_000</span>)</code>
+            <p data-i18n="impact.3">Performance strategy for a digital bank's onboarding and payments, including PIX, cards and transfers.</p>
+          </li>
+          <li>
+            <code><span class="fn">expect</span>(<span class="v">peakUsers</span>).<span class="fn">toBe</span>(<span class="n">100_000</span>) <span class="c">// still up</span></code>
+            <p data-i18n="impact.4">Load tests that proved availability at peak traffic before a major retail launch.</p>
+          </li>
+          <li>
+            <code><span class="fn">expect</span>(<span class="v">criticalBugsInProd</span>).<span class="fn">toBe</span>(<span class="n">0</span>) <span class="c">// across 30+ releases</span></code>
+            <p data-i18n="impact.5">Quality gates in CI/CD that stopped bad builds instead of reporting them afterwards.</p>
+          </li>
+          <li>
+            <code><span class="fn">expect</span>(<span class="v">qaEngineersLed</span>).<span class="fn">toBeLessThanOrEqual</span>(<span class="n">8</span>) <span class="c">// 3 time zones</span></code>
+            <p data-i18n="impact.6">Led and mentored QA teams in Brazil, the US and Portugal; my testing patterns became the standard in 12+ projects.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="experience-title" data-i18n="exp.title">Where I've tested</h2>
+          <p data-i18n="exp.lede">Fully remote since 2019, for teams in Rio de Janeiro, San Francisco and Lisbon.</p>
+        </div>
+
+        <ol class="timeline" data-testid="experience-list" reversed>
+          <li class="job now">
+            <div class="when">2025 – <span data-i18n="exp.now">now</span></div>
+            <div>
+              <h3 data-i18n="exp.cur.role">Senior QA Automation Engineer</h3>
+              <p class="job-meta" data-i18n="exp.cur.meta">Lisbon/PT (Remote). Fintech and insurance products</p>
+              <ul>
+                <li data-i18n="exp.cur.1">API test automation for third-party integrations, from contract and schema checks to complete end-to-end flows.</li>
+                <li data-i18n="exp.cur.2">Playwright E2E suites running in GitHub Actions, with Allure reporting and test plans written alongside product.</li>
+                <li data-i18n="exp.cur.3">AI-assisted test design with Claude Code and MCP, cutting the time from spec to first green run.</li>
+              </ul>
+              <p class="stack">Stack: <span>JavaScript, TypeScript, Playwright, Java, RestAssured, Cucumber, Jenkins, GitHub Actions, Allure</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2023 – 2025</div>
+            <div>
+              <h3>QA Engineer</h3>
+              <p class="job-meta" data-i18n="exp.innotech.meta">Lisbon/PT (Remote). Consultancy for a leading consumer-electronics retailer</p>
+              <ul>
+                <li data-i18n="exp.innotech.1">Cut the automated suite from 4 hours to 45 minutes with a redesigned framework.</li>
+                <li data-i18n="exp.innotech.2">Defined the iOS and Android test strategy and performance tests for 100k concurrent users.</li>
+                <li data-i18n="exp.innotech.3">30+ major releases with zero critical bugs in production, working with 30+ people across 3 time zones.</li>
+              </ul>
+              <p class="stack">Stack: <span>RestAssured, Selenium, Robot Framework, Cypress, Appium, JMeter, Docker, Jenkins</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2022 – 2023</div>
+            <div>
+              <h3>QA Engineer</h3>
+              <p class="job-meta" data-i18n="exp.integer.meta">Lisbon/PT (Remote). Consultancy for a national telecom operator</p>
+              <ul>
+                <li data-i18n="exp.integer.1">Mentored 6 QA engineers in test automation practices.</li>
+                <li data-i18n="exp.integer.2">Built web and API automation frameworks and CI quality gates for stable deployments.</li>
+              </ul>
+              <p class="stack">Stack: <span>Selenium, Katalon, Robot Framework, Cypress, Appium, JMeter, Jenkins</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2021 – 2022</div>
+            <div>
+              <h3>QA Engineer</h3>
+              <p class="job-meta" data-i18n="exp.c6.meta">Rio de Janeiro/BR (Remote). Digital bank: onboarding and payments</p>
+              <ul>
+                <li data-i18n="exp.c6.1">Led QA for 6 payment systems, including PIX, cards and transfers; managed 4 QAs.</li>
+                <li data-i18n="exp.c6.2">Performance testing for 1M+ daily transactions and a quality KPI dashboard.</li>
+                <li data-i18n="exp.c6.3">Mobile automation of critical iOS and Android journeys; WCAG 2.1 AA compliance.</li>
+              </ul>
+              <p class="stack">Stack: <span>Cypress, RestAssured, Cucumber, Robot Framework, Appium, Locust, k6, AWS</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2020 – 2021</div>
+            <div>
+              <h3>QA Engineer</h3>
+              <p class="job-meta" data-i18n="exp.noesis.meta">Rio de Janeiro/BR (Remote). Consultancy for media, banking and telecom clients</p>
+              <ul>
+                <li data-i18n="exp.noesis.1">Regression cycle down from 1 week to 1 day on a platform with 5M+ daily users.</li>
+                <li data-i18n="exp.noesis.2">Mobile automation framework covering 50+ devices; tests across 10+ microservices.</li>
+                <li data-i18n="exp.noesis.3">Led 6 QAs; QA onboarding down from 2 weeks to 3 days; patterns adopted in 12+ projects.</li>
+              </ul>
+              <p class="stack">Stack: <span>Cypress, Robot Framework, Selenium, Appium, RestAssured, Jenkins, Docker, MongoDB</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2019 – 2020</div>
+            <div>
+              <h3>QA Engineer</h3>
+              <p class="job-meta" data-i18n="exp.paycertify.meta">San Francisco/USA (Remote). Payments startup</p>
+              <ul>
+                <li data-i18n="exp.paycertify.1">Led a remote team of 8 QAs across 3 time zones.</li>
+                <li data-i18n="exp.paycertify.2">Regression down from 5 days to 8 hours; 200+ automated fraud-detection scenarios.</li>
+              </ul>
+              <p class="stack">Stack: <span>Cypress, Selenium, SuperTest, Node.js, Jenkins, Docker, AWS, PostgreSQL</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2018 – 2019</div>
+            <div>
+              <h3>QA Analyst</h3>
+              <p class="job-meta" data-i18n="exp.concrete.meta">Rio de Janeiro/BR. Consultancy for retail and investment banks</p>
+              <ul>
+                <li data-i18n="exp.concrete.1">API test strategy covering hundreds of banking endpoints; led 5 QAs.</li>
+              </ul>
+              <p class="stack">Stack: <span>Java, Selenium, Protractor, SuperTest, Postman, Jenkins</span></p>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="when">2015 – 2018</div>
+            <div>
+              <h3>Agile Automation Tester</h3>
+              <p class="job-meta" data-i18n="exp.inmetrics.meta">Rio de Janeiro/BR. Consultancy for media and insurance clients</p>
+              <ul>
+                <li data-i18n="exp.inmetrics.1">Java automation framework for multiple web apps, performance suites and a complex desktop ERP.</li>
+              </ul>
+              <p class="stack">Stack: <span>Java, Selenium, Cucumber, JMeter, AppDynamics, Jenkins</span></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Toolbox -->
+    <section id="toolbox" aria-labelledby="toolbox-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="toolbox-title" data-i18n="tools.title">Toolbox, by test layer</h2>
+          <p data-i18n="tools.lede">I pick the tool for the layer, not the other way around.</p>
+        </div>
+        <div class="tools" data-testid="toolbox">
+          <div class="tool-group">
+            <h3 data-i18n="tools.web">Web and E2E</h3>
+            <p data-i18n="tools.web.d">User journeys in real browsers</p>
+            <ul class="chips"><li class="daily">Playwright</li><li>Cypress</li><li>Selenium</li><li>Robot Framework</li><li>Cucumber</li><li>Katalon</li><li>Capybara</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.api">API and contracts</h3>
+            <p data-i18n="tools.api.d">Status, schema and business rules</p>
+            <ul class="chips"><li class="daily">RestAssured</li><li class="daily">Playwright API</li><li>Karate</li><li>SuperTest</li><li>Jest</li><li>Joi</li><li class="daily">Postman</li><li>Bruno</li><li>OpenAPI</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.mobile">Mobile</h3>
+            <p data-i18n="tools.mobile.d">iOS and Android, emulators and real devices</p>
+            <ul class="chips"><li>Appium</li><li>XCUITest</li><li>BrowserStack</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.perf">Performance</h3>
+            <p data-i18n="tools.perf.d">Load, stress and soak before launch day</p>
+            <ul class="chips"><li>k6</li><li>JMeter</li><li>Locust</li><li>Artillery</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.ci">CI/CD and cloud</h3>
+            <p data-i18n="tools.ci.d">Quality gates that block bad builds</p>
+            <ul class="chips"><li class="daily">GitHub Actions</li><li class="daily">Jenkins</li><li>GitLab CI</li><li>Azure DevOps</li><li>CircleCI</li><li>Docker</li><li>Kubernetes</li><li>AWS</li><li>Terraform</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.lang">Languages and data</h3>
+            <p data-i18n="tools.lang.d">What the frameworks are written in</p>
+            <ul class="chips"><li class="daily">JavaScript</li><li class="daily">TypeScript</li><li>Java</li><li>Python</li><li>Ruby</li><li>C#</li><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>Redis</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.report">Reporting and management</h3>
+            <p data-i18n="tools.report.d">Making quality visible</p>
+            <ul class="chips"><li class="daily">Allure</li><li>Xray</li><li class="daily">Jira</li><li>Confluence</li><li>SonarQube</li><li>AppDynamics</li></ul>
+          </div>
+          <div class="tool-group">
+            <h3 data-i18n="tools.ai">AI-assisted testing</h3>
+            <p data-i18n="tools.ai.d">Faster test design, reviewed by a human</p>
+            <ul class="chips"><li class="daily">Claude Code</li><li>MCP</li><li>Kiro</li><li>OpenAI</li></ul>
+          </div>
+        </div>
+        <p class="legend"><i aria-hidden="true"></i><span data-i18n="tools.legend">Highlighted: what I use every week right now.</span></p>
+      </div>
+    </section>
+
+    <!-- Open source -->
+    <section id="open-source" aria-labelledby="oss-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="oss-title" data-i18n="oss.title">Starter kits I share</h2>
+          <p data-i18n="oss.lede">One repository per framework, so anyone can clone a working test setup and start from there. Forked and starred by QAs learning automation.</p>
+        </div>
+        <ul class="repos" data-testid="repo-list">
+          <li class="repo-wide">
+            <a class="repo featured" href="https://www.npmjs.com/package/ulucasfraga" rel="noopener" target="_blank">
+              <span>
+                <span class="repo-name">npx ulucasfraga</span>
+                <p data-i18n="oss.npx">My CV as a command-line package. Run it in any terminal with Node installed.</p>
+              </span>
+              <code>$ npx ulucasfraga</code>
+            </a>
+          </li>
+          <li>
+            <a class="repo" href="https://github.com/uLucasFraga/playwright_for_studies" rel="noopener" target="_blank">
+              <span class="repo-name">playwright_for_studies</span>
+              <p data-i18n="oss.pw">UI and API tests with Playwright.</p>
+              <span class="repo-foot"><span>JavaScript</span><span><span class="star">★</span> 2</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="repo" href="https://github.com/uLucasFraga/restassured_for_studies" rel="noopener" target="_blank">
+              <span class="repo-name">restassured_for_studies</span>
+              <p data-i18n="oss.ra">REST API tests with RestAssured and JUnit.</p>
+              <span class="repo-foot"><span>Java</span><span><span class="star">★</span> 31</span><span data-i18n-count="11" data-i18n="oss.forks11">11 forks</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="repo" href="https://github.com/uLucasFraga/cypress_api_for_studies" rel="noopener" target="_blank">
+              <span class="repo-name">cypress_api_for_studies</span>
+              <p data-i18n="oss.cy">REST API tests with Cypress and Mocha.</p>
+              <span class="repo-foot"><span>JavaScript</span><span><span class="star">★</span> 16</span><span data-i18n="oss.forks4">4 forks</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="repo" href="https://github.com/uLucasFraga/selenium_java_for_studies" rel="noopener" target="_blank">
+              <span class="repo-name">selenium_java_for_studies</span>
+              <p data-i18n="oss.se">Web UI tests with Selenium, Cucumber and JUnit.</p>
+              <span class="repo-foot"><span>Java</span><span><span class="star">★</span> 13</span><span data-i18n="oss.forks2">2 forks</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="repo" href="https://github.com/uLucasFraga/robot_api_for_studies" rel="noopener" target="_blank">
+              <span class="repo-name">robot_api_for_studies</span>
+              <p data-i18n="oss.rb">REST API tests with Robot Framework.</p>
+              <span class="repo-foot"><span>Robot Framework</span><span><span class="star">★</span> 4</span><span data-i18n="oss.forks1">1 fork</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="repo" href="https://github.com/uLucasFraga/supertest_for_studies" rel="noopener" target="_blank">
+              <span class="repo-name">supertest_for_studies</span>
+              <p data-i18n="oss.st">REST API tests with SuperTest, Mocha, Chai and Joi.</p>
+              <span class="repo-foot"><span>JavaScript</span><span><span class="star">★</span> 3</span></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Writing -->
+    <section id="writing" aria-labelledby="writing-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="writing-title" data-i18n="w.title">Things I've written</h2>
+          <p data-i18n="w.lede">Notes from real projects, written so the next tester doesn't have to figure it out alone.</p>
+        </div>
+        <ul class="posts" data-testid="post-list">
+          <li>
+            <a class="post" href="https://medium.com/@ulucasfraga/a-linha-t%C3%AAnue-entre-o-uso-da-ia-e-a-iqa-2a55008f1cde" rel="noopener" target="_blank" lang="pt-BR">
+              <div><h3>A linha tênue entre o uso da iA e a iQA!</h3><p data-i18n="w.personal">On my Medium</p></div>
+              <span class="lang-tag" title="Portuguese">PT</span>
+            </a>
+          </li>
+          <li>
+            <a class="post" href="https://medium.com/assertqualityassurance/testando-seu-contrato-com-o-restassured-f0e974fb9bcb" rel="noopener" target="_blank" lang="pt-BR">
+              <div><h3>Testando seu “contrato” com o restassured</h3><p data-i18n="w.assert">Published in Assert QA</p></div>
+              <span class="lang-tag" title="Portuguese">PT</span>
+            </a>
+          </li>
+          <li>
+            <a class="post" href="https://medium.com/assertqualityassurance/setting-cypress-and-cucumber-in-e2e-tests-6239adac1077" rel="noopener" target="_blank" lang="en">
+              <div><h3>Setting Cypress and Cucumber in e2e tests</h3><p data-i18n="w.assert">Published in Assert QA</p></div>
+              <span class="lang-tag" title="English">EN</span>
+            </a>
+          </li>
+          <li>
+            <a class="post" href="https://medium.com/assertqualityassurance/element-doesnt-load-properly-in-the-browser-using-protractor-let-s-solve-it-8381b71d3956" rel="noopener" target="_blank" lang="en">
+              <div><h3>Element doesn’t load properly in the browser using Protractor? Let’s solve it!</h3><p data-i18n="w.assert">Published in Assert QA</p></div>
+              <span class="lang-tag" title="English">EN</span>
+            </a>
+          </li>
+        </ul>
+        <p class="posts-more"><a href="https://medium.com/@ulucasfraga" rel="noopener" target="_blank" data-i18n="w.all">All posts on Medium</a></p>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section id="community" aria-labelledby="community-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="community-title" data-i18n="com.title">Testing is a team sport</h2>
+          <p data-i18n="com.lede">I learned most of what I know from other testers, so I keep giving it back.</p>
+        </div>
+        <div class="community">
+          <article>
+            <p class="when">2019 – <span data-i18n="exp.now">now</span></p>
+            <h3>Agile Testers</h3>
+            <p data-i18n="com.at">One of the organizers of this Brazilian QA community. Content is on pause, but I still help in the groups every week: reviewing frameworks, answering questions and pointing people to their first automation job.</p>
+          </article>
+          <article>
+            <p class="when" data-i18n="com.mot.when">From 2018</p>
+            <h3>Ministry of Testing Rio de Janeiro</h3>
+            <p data-i18n="com.mot">Former coordinator of the Rio chapter: meetups, speakers and a job board for local testers.</p>
+          </article>
+          <article>
+            <p class="when" data-i18n="com.always">Ongoing</p>
+            <h3 data-i18n="com.groups.t">QA groups and mentoring</h3>
+            <p data-i18n="com.groups">Mentoring QAs moving into automation, and writing on <a href="https://medium.com/@ulucasfraga" rel="noopener" target="_blank">Medium</a>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 id="contact-title" data-i18n="contact.title">Have a release that keeps breaking?</h2>
+        <p class="lede" data-i18n="contact.lede">I'm in Lisbon and work in Portuguese, English and Spanish. Open to conversations about test automation, QA strategy and mentoring.</p>
+        <div class="links" data-testid="contact-links">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/ulucasfraga/" rel="noopener" target="_blank" data-i18n="contact.linkedin">Message me on LinkedIn</a>
+          <a class="btn btn-ghost" href="mailto:ulucasfraga@gmail.com" data-i18n="contact.email">Send an email</a>
+          <a class="btn btn-ghost" href="https://github.com/uLucasFraga" rel="noopener" target="_blank">GitHub</a>
+          <a class="btn btn-ghost" href="https://medium.com/@ulucasfraga" rel="noopener" target="_blank">Medium</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Lucas Fraga</span>
+      <span data-i18n="footer.tested">This page has its own <a href="https://github.com/uLucasFraga/uLucasFraga.github.io/tree/main/tests">Playwright test suite</a>.</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var PT = {
+        'skip': 'Pular para o conteúdo',
+        'nav.impact': 'Impacto',
+        'nav.experience': 'Experiência',
+        'nav.toolbox': 'Ferramentas',
+        'nav.oss': 'Open source',
+        'nav.community': 'Comunidade',
+        'nav.contact': 'Contato',
+        'hero.role': 'Senior QA Automation Engineer, Lisboa',
+        'hero.title': 'Eu deixo os releases sem graça.',
+        'hero.lede': 'Onze anos construindo os testes que pegam o bug antes do usuário: web, API, mobile e performance, ligados ao CI para que cada deploy precise merecer chegar à produção.',
+        'hero.cta1': 'Ver minha experiência',
+        'hero.cta2': 'Falar no LinkedIn',
+        'term.rerun': 'Rodar de novo',
+        'impact.title': 'Resultados, escritos como asserções',
+        'impact.lede': 'Números de projetos reais em bancos, pagamentos, mídia, telecom e varejo.',
+        'impact.1': 'Reconstruí a suíte de regressão de uma grande plataforma de varejo para terminar antes do café.',
+        'impact.2': 'Automatizei os fluxos críticos de UI e API de uma plataforma com mais de 5M de usuários por dia.',
+        'impact.3': 'Estratégia de performance para o onboarding e os pagamentos de um banco digital, incluindo PIX, cartões e transferências.',
+        'impact.4': 'Testes de carga que provaram a disponibilidade no pico, antes de um grande lançamento no varejo.',
+        'impact.5': 'Quality gates no CI/CD que barram o build ruim, em vez de reportar o problema depois.',
+        'impact.6': 'Liderei e mentorei times de QA no Brasil, nos EUA e em Portugal; meus padrões de teste viraram regra em mais de 12 projetos.',
+        'exp.title': 'Onde eu já testei',
+        'exp.lede': '100% remoto desde 2019, para times no Rio de Janeiro, em São Francisco e em Lisboa.',
+        'exp.now': 'hoje',
+        'exp.cur.role': 'Senior QA Automation Engineer',
+        'exp.cur.meta': 'Lisboa/PT (Remoto). Produtos de fintech e seguros',
+        'exp.cur.1': 'Automação de testes de API para integrações com terceiros, de validação de contrato e schema até fluxos completos ponta a ponta.',
+        'exp.cur.2': 'Suítes E2E em Playwright rodando no GitHub Actions, com relatórios Allure e planos de teste escritos junto com o produto.',
+        'exp.cur.3': 'Desenho de testes assistido por IA com Claude Code e MCP, encurtando o caminho da especificação até o primeiro build verde.',
+        'exp.innotech.meta': 'Lisboa/PT (Remoto). Consultoria para um grande varejista de eletrônicos',
+        'exp.innotech.1': 'Reduzi a suíte automatizada de 4 horas para 45 minutos com um framework redesenhado.',
+        'exp.innotech.2': 'Defini a estratégia de testes iOS e Android e os testes de performance para 100 mil usuários simultâneos.',
+        'exp.innotech.3': 'Mais de 30 releases grandes sem bugs críticos em produção, trabalhando com mais de 30 pessoas em 3 fusos horários.',
+        'exp.integer.meta': 'Lisboa/PT (Remoto). Consultoria para uma operadora de telecom nacional',
+        'exp.integer.1': 'Mentorei 6 QAs em práticas de automação de testes.',
+        'exp.integer.2': 'Construí frameworks de automação web e API e quality gates no CI para deploys estáveis.',
+        'exp.c6.meta': 'Rio de Janeiro/BR (Remoto). Banco digital: onboarding e pagamentos',
+        'exp.c6.1': 'Liderei o QA de 6 sistemas de pagamento, incluindo PIX, cartões e transferências; gestão de 4 QAs.',
+        'exp.c6.2': 'Testes de performance para mais de 1M de transações por dia e um dashboard de KPIs de qualidade.',
+        'exp.c6.3': 'Automação mobile das jornadas críticas em iOS e Android; conformidade com WCAG 2.1 AA.',
+        'exp.noesis.meta': 'Rio de Janeiro/BR (Remoto). Consultoria para clientes de mídia, bancos e telecom',
+        'exp.noesis.1': 'Ciclo de regressão de 1 semana para 1 dia, numa plataforma com mais de 5M de usuários por dia.',
+        'exp.noesis.2': 'Framework de automação mobile cobrindo mais de 50 dispositivos; testes em mais de 10 microsserviços.',
+        'exp.noesis.3': 'Liderei 6 QAs; onboarding de QAs de 2 semanas para 3 dias; padrões adotados em mais de 12 projetos.',
+        'exp.paycertify.meta': 'São Francisco/EUA (Remoto). Startup de pagamentos',
+        'exp.paycertify.1': 'Liderei um time remoto de 8 QAs em 3 fusos horários.',
+        'exp.paycertify.2': 'Regressão de 5 dias para 8 horas; mais de 200 cenários automatizados de detecção de fraude.',
+        'exp.concrete.meta': 'Rio de Janeiro/BR. Consultoria para bancos de varejo e de investimento',
+        'exp.concrete.1': 'Estratégia de testes de API cobrindo centenas de endpoints bancários; liderei 5 QAs.',
+        'exp.inmetrics.meta': 'Rio de Janeiro/BR. Consultoria para clientes de mídia e seguros',
+        'exp.inmetrics.1': 'Framework de automação em Java para várias aplicações web, suítes de performance e um ERP desktop complexo.',
+        'tools.title': 'Ferramentas, por camada de teste',
+        'tools.lede': 'Eu escolho a ferramenta pela camada, e não o contrário.',
+        'tools.web': 'Web e E2E',
+        'tools.web.d': 'Jornadas de usuário em navegadores reais',
+        'tools.api': 'API e contratos',
+        'tools.api.d': 'Status, schema e regras de negócio',
+        'tools.mobile': 'Mobile',
+        'tools.mobile.d': 'iOS e Android, emuladores e dispositivos reais',
+        'tools.perf': 'Performance',
+        'tools.perf.d': 'Carga, estresse e resistência antes do lançamento',
+        'tools.ci': 'CI/CD e cloud',
+        'tools.ci.d': 'Quality gates que barram o build ruim',
+        'tools.lang': 'Linguagens e dados',
+        'tools.lang.d': 'Em que os frameworks são escritos',
+        'tools.report': 'Relatórios e gestão',
+        'tools.report.d': 'Tornando a qualidade visível',
+        'tools.ai': 'Testes assistidos por IA',
+        'tools.ai.d': 'Desenho de testes mais rápido, revisado por uma pessoa',
+        'tools.legend': 'Em destaque: o que eu uso toda semana hoje.',
+        'oss.title': 'Starter kits que eu compartilho',
+        'oss.lede': 'Um repositório por framework, para qualquer pessoa clonar um setup de testes funcionando e começar dali. Com forks e estrelas de QAs aprendendo automação.',
+        'oss.npx': 'Meu CV como pacote de linha de comando. Rode em qualquer terminal com Node instalado.',
+        'oss.pw': 'Testes de UI e API com Playwright.',
+        'oss.ra': 'Testes de API REST com RestAssured e JUnit.',
+        'oss.cy': 'Testes de API REST com Cypress e Mocha.',
+        'oss.se': 'Testes de UI web com Selenium, Cucumber e JUnit.',
+        'oss.rb': 'Testes de API REST com Robot Framework.',
+        'oss.st': 'Testes de API REST com SuperTest, Mocha, Chai e Joi.',
+        'oss.forks11': '11 forks', 'oss.forks4': '4 forks', 'oss.forks2': '2 forks', 'oss.forks1': '1 fork',
+        'nav.writing': 'Textos',
+        'w.title': 'O que eu já escrevi',
+        'w.lede': 'Notas de projetos reais, escritas para que o próximo tester não precise descobrir sozinho.',
+        'w.personal': 'No meu Medium',
+        'w.assert': 'Publicado na Assert QA',
+        'w.all': 'Todos os textos no Medium',
+        'com.title': 'Teste é esporte de equipe',
+        'com.lede': 'Aprendi quase tudo o que sei com outros testers, então continuo devolvendo.',
+        'com.at': 'Um dos organizadores desta comunidade brasileira de QA. Os conteúdos estão em pausa, mas sigo ajudando nos grupos toda semana: revisando frameworks, tirando dúvidas e ajudando gente a conseguir o primeiro emprego em automação.',
+        'com.mot.when': 'A partir de 2018',
+        'com.mot': 'Fui coordenador do capítulo do Rio: meetups, palestrantes e um mural de vagas para testers locais.',
+        'com.always': 'Sempre',
+        'com.groups.t': 'Grupos de QA e mentoria',
+        'com.groups': 'Mentoria para QAs que estão indo para automação, e textos no <a href="https://medium.com/@ulucasfraga" rel="noopener" target="_blank">Medium</a>.',
+        'contact.title': 'Tem um release que vive quebrando?',
+        'contact.lede': 'Estou em Lisboa e trabalho em português, inglês e espanhol. Aberto a conversas sobre automação de testes, estratégia de QA e mentoria.',
+        'contact.linkedin': 'Falar comigo no LinkedIn',
+        'contact.email': 'Enviar um e-mail',
+        'footer.tested': 'Esta página tem a sua própria <a href="https://github.com/uLucasFraga/uLucasFraga.github.io/tree/main/tests">suíte de testes em Playwright</a>.'
+      };
+
+      var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+      nodes.forEach(function (node) { node.dataset.en = node.innerHTML; });
+
+      var TESTS = {
+        en: {
+          run: 'Running 8 tests using 4 workers',
+          tests: [
+            ['pass', 'career', 'has 11+ years of QA since 2015'],
+            ['pass', 'web', 'automates E2E with Playwright, Cypress and Selenium'],
+            ['pass', 'api', 'validates APIs with RestAssured, Karate and SuperTest'],
+            ['pass', 'mobile', 'tests iOS and Android with Appium'],
+            ['pass', 'perf', 'load-tests with k6, JMeter and Locust'],
+            ['pass', 'ci', 'blocks bad builds with CI quality gates'],
+            ['pass', 'team', 'has led QA teams of up to 8 engineers'],
+            ['skip', 'life', 'stops learning']
+          ],
+          summary: '7 passed, 1 skipped',
+          skipNote: 'reason: never'
+        },
+        pt: {
+          run: 'Executando 8 testes com 4 workers',
+          tests: [
+            ['pass', 'career', 'tem 11+ anos de QA desde 2015'],
+            ['pass', 'web', 'automatiza E2E com Playwright, Cypress e Selenium'],
+            ['pass', 'api', 'valida APIs com RestAssured, Karate e SuperTest'],
+            ['pass', 'mobile', 'testa iOS e Android com Appium'],
+            ['pass', 'perf', 'faz teste de carga com k6, JMeter e Locust'],
+            ['pass', 'ci', 'barra builds ruins com quality gates no CI'],
+            ['pass', 'team', 'já liderou times de até 8 QAs'],
+            ['skip', 'life', 'para de aprender']
+          ],
+          summary: '7 passaram, 1 ignorado',
+          skipNote: 'motivo: nunca'
+        }
+      };
+
+      var termBody = document.getElementById('term-body');
+      var rerunButton = document.querySelector('[data-testid="rerun-tests"]');
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var timers = [];
+      var currentLang = 'en';
+
+      function escapeHtml(text) {
+        return text.replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; });
+      }
+
+      function buildLines(lang) {
+        var copy = TESTS[lang];
+        var lines = [];
+        lines.push('<span class="prompt">❯</span> npx playwright test <span class="file">ulucasfraga.spec.ts</span>');
+        lines.push('');
+        lines.push('<span class="muted">' + copy.run + '</span>');
+        lines.push('');
+        copy.tests.forEach(function (test, index) {
+          var mark = test[0] === 'pass' ? '<span class="pass">  ✓</span>' : '<span class="skip">  -</span>';
+          var duration = test[0] === 'pass' ? ' <span class="muted">(' + (0.3 + index * 0.17).toFixed(1) + 's)</span>' : ' <span class="muted">' + copy.skipNote + '</span>';
+          lines.push(mark + ' <span class="muted">' + (index + 1) + '</span> <span class="tag">[' + test[1] + ']</span> › ' + escapeHtml(test[2]) + duration);
+        });
+        lines.push('');
+        lines.push('<span class="pass">  ' + copy.summary + '</span> <span class="muted">(2.4s)</span>');
+        lines.push('');
+        lines.push('<span class="prompt">❯</span> <span class="cursor" aria-hidden="true"></span>');
+        return lines;
+      }
+
+      function clearTimers() {
+        timers.forEach(function (id) { clearTimeout(id); });
+        timers = [];
+      }
+
+      function runTerminal(lang) {
+        clearTimers();
+        var lines = buildLines(lang);
+        termBody.innerHTML = lines.map(function (html) {
+          return '<p class="line">' + (html || '&nbsp;') + '</p>';
+        }).join('');
+        var rendered = termBody.querySelectorAll('.line');
+
+        if (reduceMotion) {
+          rendered.forEach(function (line) { line.classList.add('on'); });
+          termBody.dataset.state = 'done';
+          return;
+        }
+
+        rerunButton.disabled = true;
+        termBody.dataset.state = 'running';
+        var delay = 250;
+        rendered.forEach(function (line, index) {
+          delay += index < 4 ? 260 : 190;
+          timers.push(setTimeout(function () { line.classList.add('on'); }, delay));
+        });
+        timers.push(setTimeout(function () {
+          rerunButton.disabled = false;
+          termBody.dataset.state = 'done';
+        }, delay + 50));
+      }
+
+      function setLanguage(lang) {
+        currentLang = lang === 'pt' ? 'pt' : 'en';
+        document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+        document.documentElement.dataset.lang = currentLang;
+        nodes.forEach(function (node) {
+          var key = node.dataset.i18n;
+          node.innerHTML = currentLang === 'pt' && PT[key] ? PT[key] : node.dataset.en;
+        });
+        document.querySelectorAll('[data-set-lang]').forEach(function (button) {
+          button.setAttribute('aria-pressed', String(button.dataset.setLang === currentLang));
+        });
+        try { localStorage.setItem('lang', currentLang); } catch (error) { /* storage unavailable */ }
+        runTerminal(currentLang);
+      }
+
+      document.querySelectorAll('[data-set-lang]').forEach(function (button) {
+        button.addEventListener('click', function () { setLanguage(button.dataset.setLang); });
+      });
+      rerunButton.addEventListener('click', function () { runTerminal(currentLang); });
+
+      var initial = new URLSearchParams(location.search).get('lang');
+      if (!initial) {
+        try { initial = localStorage.getItem('lang'); } catch (error) { initial = null; }
+      }
+      setLanguage(initial || 'en');
+    })();
+  </script>
+</body>
+</html>
